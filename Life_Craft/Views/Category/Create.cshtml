@@ -1,0 +1,21 @@
+﻿@model Category
+
+<h1>Create Category</h1>
+<hr />
+<form method="post" >
+	<div class="inputs">
+		<div>
+			<label asp-for="Name"></label>
+			<input asp-for="Name" placeholder="Enter Category Name" />
+		</div>
+		<div>
+			<label asp-for="DisplayOrder"></label>
+			<input asp-for="DisplayOrder" placeholder="Enter a number" />
+		</div>
+
+	</div>
+	<div class="buttons">
+		<button class="back-btn" asp-controller="Category" asp-action="Index">Back</button>
+		<button >Create</button>
+	</div>
+</form>
