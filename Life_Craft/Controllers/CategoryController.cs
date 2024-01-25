@@ -24,6 +24,7 @@ namespace Life_Craft.Controllers
         {
             if(obj.Name == obj.DisplayOrder.ToString())
             {
+                //Add an error and display it if this condition occurs
                 ModelState.AddModelError("Name", "The display order cannot exactly match the name");
             }
             if (ModelState.IsValid)

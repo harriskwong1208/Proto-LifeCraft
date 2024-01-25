@@ -4,6 +4,11 @@
 <hr />
 <form method="post" >
 	<div class="inputs">
+		@* asp-validation-summary can have different values
+			1. ModelOnly= only allow validations from models (dataAnnotations)
+			2. None = allow no validations
+			3. All = allows all validations 
+		*@	
 		<div asp-validation-summary="All"></div>
 		<div>
 			<label asp-for="Name"></label>
@@ -22,3 +27,9 @@
 		<button >Create</button>
 	</div>
 </form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial"/>
+	}
+}
