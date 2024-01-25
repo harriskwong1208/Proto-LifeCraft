@@ -22,11 +22,14 @@ namespace Life_Craft.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-
-            /*If want to redirect to different controller, put controller name as second parameter */
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+            return View();
+			/*If want to redirect to different controller, put controller name as second parameter */
 			//return RedirectToAction("Index","Home");
 
 		}
