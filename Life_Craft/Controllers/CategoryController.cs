@@ -31,6 +31,8 @@ namespace Life_Craft.Controllers
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+				TempData["Success"] = "Created succesfully";
+
 				return RedirectToAction("Index");
 			}
             return View();
@@ -62,6 +64,7 @@ namespace Life_Craft.Controllers
 			{
 				_db.Categories.Update(obj);
 				_db.SaveChanges();
+				TempData["Success"] = "Edited succesfully";
 				return RedirectToAction("Index");
 			}
 			return View();
@@ -69,5 +72,36 @@ namespace Life_Craft.Controllers
 			//return RedirectToAction("Index","Home");
 
 		}
+		public IActionResult Delete(int? id)
+		{
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			Category? obj = _db.Categories.Find(id);
+			if (obj == null)
+			{
+				return NotFound();
+			}
+
+
+
+			return View(obj);
+		}
+		[HttpPost,ActionName("delete")]
+		public IActionResult DeletePOST(int? id)
+		{
+			Category? obj = _db.Categories.Find(id);
+			if(obj == null) {
+				return NotFound();
+			}
+
+			_db.Categories.Remove(obj);
+			_db.SaveChanges();
+			TempData["Success"] = "Deleted succesfully";
+			return RedirectToAction("Index");
+
+		}
+
 	}
 }

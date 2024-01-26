@@ -1,0 +1,24 @@
+﻿@model Category
+
+<h1>Create Category</h1>
+<hr />
+<form method="post">
+	<div class="inputs">
+
+		<div asp-validation-summary="All"></div>
+		<div>
+			<label asp-for="Name"></label>
+			<input asp-for="Name" disabled placeholder="Enter Category Name" />
+		</div>
+		<div>
+			<label asp-for="DisplayOrder"></label>
+			<input asp-for="DisplayOrder" disabled placeholder="Enter a number" />
+		</div>
+
+	</div>
+	<div class="buttons">
+		<button class="back-btn" asp-controller="Category" asp-action="Index">Back</button>
+		<button>Delete</button>
+	</div>
+</form>
+
