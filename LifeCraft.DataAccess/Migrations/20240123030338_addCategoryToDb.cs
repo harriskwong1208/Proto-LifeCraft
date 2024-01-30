@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Life_Craft.Migrations
+ namespace LifeCraft.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class addCategoryToDb : Migration

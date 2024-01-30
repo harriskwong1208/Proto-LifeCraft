@@ -1,5 +1,6 @@
-﻿using Life_Craft.Data;
-using Life_Craft.Models;
+﻿
+using LifeCraft.DataAccess.Data;
+using LifeCraft.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Life_Craft.Controllers

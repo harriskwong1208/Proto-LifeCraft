@@ -1,4 +1,4 @@
-using Life_Craft.Data;
+using LifeCraft.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

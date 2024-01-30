@@ -5,7 +5,11 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Life_Craft", "Life_Craft\Life_Craft.csproj", "{5FF41959-E008-4517-B849-ED5619A4665C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeCraft_Razor_Temp", "LifeCraft_Razor_Temp\LifeCraft_Razor_Temp.csproj", "{3A50EF0E-808E-40F3-AD61-BF742E68AA17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeCraft.DataAccess", "LifeCraft.DataAccess\LifeCraft.DataAccess.csproj", "{CABCF516-044C-4E41-9304-0B750C7AE790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeCraft.Models", "LifeCraft.Models\LifeCraft.Models.csproj", "{CA3FDC74-B5C6-46CB-9785-FE9AEE478715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeCraft.Utility", "LifeCraft.Utility\LifeCraft.Utility.csproj", "{836D955E-8DC3-4BB5-90CD-549B7FF9FB3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,18 @@ Global
 		{5FF41959-E008-4517-B849-ED5619A4665C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FF41959-E008-4517-B849-ED5619A4665C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FF41959-E008-4517-B849-ED5619A4665C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A50EF0E-808E-40F3-AD61-BF742E68AA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A50EF0E-808E-40F3-AD61-BF742E68AA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A50EF0E-808E-40F3-AD61-BF742E68AA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A50EF0E-808E-40F3-AD61-BF742E68AA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABCF516-044C-4E41-9304-0B750C7AE790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABCF516-044C-4E41-9304-0B750C7AE790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABCF516-044C-4E41-9304-0B750C7AE790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABCF516-044C-4E41-9304-0B750C7AE790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA3FDC74-B5C6-46CB-9785-FE9AEE478715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA3FDC74-B5C6-46CB-9785-FE9AEE478715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA3FDC74-B5C6-46CB-9785-FE9AEE478715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA3FDC74-B5C6-46CB-9785-FE9AEE478715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{836D955E-8DC3-4BB5-90CD-549B7FF9FB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836D955E-8DC3-4BB5-90CD-549B7FF9FB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836D955E-8DC3-4BB5-90CD-549B7FF9FB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836D955E-8DC3-4BB5-90CD-549B7FF9FB3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

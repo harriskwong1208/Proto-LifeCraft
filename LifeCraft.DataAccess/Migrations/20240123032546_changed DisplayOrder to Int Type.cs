@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Life_Craft.Migrations
+namespace LifeCraft.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class changedDisplayOrdertoIntType : Migration

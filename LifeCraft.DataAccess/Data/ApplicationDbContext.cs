@@ -1,7 +1,7 @@
-﻿using Life_Craft.Models;
+﻿using LifeCraft.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Life_Craft.Data
+namespace LifeCraft.DataAccess.Data
 {
     public class ApplicationDbContext: DbContext
     {

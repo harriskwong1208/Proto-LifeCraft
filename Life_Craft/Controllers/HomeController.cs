@@ -1,4 +1,4 @@
-using Life_Craft.Models;
+using LifeCraft.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

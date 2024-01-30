@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Life_Craft.Models
+namespace LifeCraft.Models
 {
     public class Category
     {

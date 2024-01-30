@@ -1,4 +1,4 @@
-namespace Life_Craft.Models
+namespace LifeCraft.Models
 {
     public class ErrorViewModel
     {

@@ -17,4 +17,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LifeCraft.DataAccess\LifeCraft.DataAccess.csproj" />
+    <ProjectReference Include="..\LifeCraft.Models\LifeCraft.Models.csproj" />
+  </ItemGroup>
+
 </Project>
