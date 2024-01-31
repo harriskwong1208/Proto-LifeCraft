@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LifeCraft.DataAccess.Repository.IRepository
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        ICategoryRepository Category { get; }
+        void Save();
+
     }
 }
