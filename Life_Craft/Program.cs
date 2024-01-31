@@ -1,4 +1,6 @@
 using LifeCraft.DataAccess.Data;
+using LifeCraft.DataAccess.Repository;
+using LifeCraft.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+//Added, so when we want the implementation in the category controller class, it will know that it will have the immplementation of CategoryRepository
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 

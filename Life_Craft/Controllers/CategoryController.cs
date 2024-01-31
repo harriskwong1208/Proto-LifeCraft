@@ -1,5 +1,6 @@
 ﻿
 using LifeCraft.DataAccess.Data;
+using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,13 +8,13 @@ namespace Life_Craft.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db) { 
-            _db = db;
+        private readonly ICategoryRepository _categoryRepo;
+        public CategoryController(ICategoryRepository db) { 
+            _categoryRepo = db;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _db.Categories.ToList();
+            List<Category> objCategoryList = _categoryRepo.GetAll().ToList();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -30,8 +31,8 @@ namespace Life_Craft.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+				_categoryRepo.Add(obj);
+				_categoryRepo.Save();
 				TempData["Success"] = "Created succesfully";
 
 				return RedirectToAction("Index");
@@ -47,7 +48,7 @@ namespace Life_Craft.Controllers
 			{
 				return NotFound();
 			}
-			Category? obj = _db.Categories.Find(id);
+			Category? obj = _categoryRepo.Get(u=>u.Id == id);     
 			if(obj == null)
 			{
 				return NotFound();
@@ -63,8 +64,9 @@ namespace Life_Craft.Controllers
 
 			if (ModelState.IsValid)
 			{
-				_db.Categories.Update(obj);
-				_db.SaveChanges();
+
+				_categoryRepo.Update(obj);
+				_categoryRepo.Save();
 				TempData["Success"] = "Edited succesfully";
 				return RedirectToAction("Index");
 			}
@@ -79,8 +81,8 @@ namespace Life_Craft.Controllers
 			{
 				return NotFound();
 			}
-			Category? obj = _db.Categories.Find(id);
-			if (obj == null)
+			Category? obj = _categoryRepo.Get(u => u.Id == id);
+            if (obj == null)
 			{
 				return NotFound();
 			}
@@ -92,13 +94,13 @@ namespace Life_Craft.Controllers
 		[HttpPost,ActionName("delete")]
 		public IActionResult DeletePOST(int? id)
 		{
-			Category? obj = _db.Categories.Find(id);
-			if(obj == null) {
+			Category? obj = _categoryRepo.Get(u => u.Id == id);
+            if (obj == null) {
 				return NotFound();
 			}
+			_categoryRepo.Remove(obj);
+			_categoryRepo.Save();
 
-			_db.Categories.Remove(obj);
-			_db.SaveChanges();
 			TempData["Success"] = "Deleted succesfully";
 			return RedirectToAction("Index");
 
