@@ -1,5 +1,6 @@
 ﻿using LifeCraft.Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace LifeCraft.DataAccess.Data
 {
@@ -10,6 +11,8 @@ namespace LifeCraft.DataAccess.Data
             
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Event> Events { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
@@ -18,6 +21,15 @@ namespace LifeCraft.DataAccess.Data
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
 
                 );
-        }
+            modelBuilder.Entity<Event>().HasData(
+                new Event { Id = 1, Name = "Doctor's visit", Description = "Upcoming yearly checkup" },
+                new Event { Id = 2, Name = "Homework"},
+                new Event { Id = 3, Name = "Interview" }
+
+                );
+
+
+
+    }
     }
 }
