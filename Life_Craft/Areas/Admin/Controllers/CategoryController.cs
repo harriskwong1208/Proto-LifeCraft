@@ -11,7 +11,7 @@ namespace Life_Craft.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         public CategoryController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork; ;
+            _unitOfWork = unitOfWork; 
         }
         public IActionResult Index()
         {

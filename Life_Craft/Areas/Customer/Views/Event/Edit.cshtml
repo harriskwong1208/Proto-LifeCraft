@@ -1,0 +1,40 @@
+﻿@model Event
+
+<h1>Edit Event</h1>
+<hr />
+<form method="post">
+	<div class="inputs">
+		@* asp-validation-summary can have different values
+		1. ModelOnly= only allow validations from models (dataAnnotations)
+		2. None = allow no validations
+		3. All = allows all validations
+		*@
+		<div asp-validation-summary="All"></div>
+		<div>
+			<label asp-for="Name"></label>
+			<input asp-for="Name" placeholder="Enter Event Name" />
+			<span asp-validation-for="Name"></span>
+		</div>
+		<div>
+			<label asp-for="Description"></label>
+			<input asp-for="Description" placeholder="Enter a description" />
+			<span asp-validation-for="Description"></span>
+		</div>
+		<div>
+			<label asp-for="Date"></label>
+			<input asp-for="Date" placeholder="Upcoming Data" />
+			<span asp-validation-for="Date"></span>
+		</div>
+
+	</div>
+	<div class="buttons">
+		<button class="back-btn" asp-controller="Event" asp-action="Index">Back</button>
+		<button>Update</button>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
