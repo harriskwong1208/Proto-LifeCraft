@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LifeCraft.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace LifeCraft.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public  interface IEventRepository : IRepository<Event>
     {
-        ICategoryRepository Category { get; }
-        IEventRepository Event { get; }
-        void Save();
-
+        void Update(Event obj);
+        
     }
 }

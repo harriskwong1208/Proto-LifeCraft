@@ -15,12 +15,12 @@ namespace LifeCraft.Models
         [Required]
         [MaxLength(30)]
         [DisplayName("Event Name")]
-        public string Name{ get; set; }
+        public string? Name{ get; set; }
         
-        public string Description { get; set; }
+        public string? Description { get; set; }
       
         [Display(Name = "Event Date")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
     }
 }

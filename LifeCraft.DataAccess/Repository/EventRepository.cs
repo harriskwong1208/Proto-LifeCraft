@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace LifeCraft.DataAccess.Repository
 {
-    public class CategoryRepository: Repository<Category> , ICategoryRepository
+    public class EventRepository : Repository<Event> , IEventRepository
     {
-        private ApplicationDbContext _db;
-        public CategoryRepository(ApplicationDbContext db) :base(db){
+        private  ApplicationDbContext _db;
+        public EventRepository(ApplicationDbContext db) : base(db) 
+        { 
             _db = db;
         }
-
-
-        public void Update(Category obj)
+        public void Update(Event obj)
         {
-            _db.Categories.Update(obj);
+            _db.Events.Update(obj);
         }
     }
 }
