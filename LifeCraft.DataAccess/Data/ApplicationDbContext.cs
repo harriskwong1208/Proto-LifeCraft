@@ -22,9 +22,9 @@ namespace LifeCraft.DataAccess.Data
 
                 );
             modelBuilder.Entity<Event>().HasData(
-                new Event { Id = 1, Name = "Doctor's visit", Description = "Upcoming yearly checkup" },
-                new Event { Id = 2, Name = "Homework"},
-                new Event { Id = 3, Name = "Interview" }
+                new Event { Id = 1, Name = "Doctor's visit", Description = "Upcoming yearly checkup" ,CategoryId= 1},
+                new Event { Id = 2,Name = "Homework" , CategoryId = 2 },
+                new Event { Id = 3, Name = "Interview" , CategoryId = 3 }
 
                 );
 
