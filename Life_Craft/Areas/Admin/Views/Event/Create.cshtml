@@ -23,6 +23,13 @@
 			<label asp-for="Date"></label>
 			<input asp-for="Date" placeholder="Enter a date for this event" />
 		</div>
+		<div>
+			<select asp-for="CategoryId" asp-items="ViewBag.CategoryList" >
+				<option disabled selected >--Select Category--</option>
+			</select>
+			<label asp-for="CategoryId"></label>
+			<span asp-validation-for="CategoryId" ></span>
+		</div>
 	</div>
 	<div class="buttons">
 		<button class="back-btn" asp-controller="Event" asp-action="Index">Back</button>

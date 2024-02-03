@@ -1,6 +1,7 @@
 ﻿using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Life_Craft.Areas.Admin.Controllers
@@ -52,7 +53,13 @@ namespace Life_Craft.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+			IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().ToList().Select(u => new SelectListItem
+			{
+				Text = u.Name,
+				Value = u.Id.ToString()
+			});
+            ViewBag.CategoryList = CategoryList;
+			return View();
         }
         [HttpPost]
         public IActionResult Create(Event obj)
