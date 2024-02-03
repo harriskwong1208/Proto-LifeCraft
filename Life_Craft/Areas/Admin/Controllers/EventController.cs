@@ -1,5 +1,6 @@
 ﻿using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
+using LifeCraft.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -58,19 +59,32 @@ namespace Life_Craft.Areas.Admin.Controllers
 				Text = u.Name,
 				Value = u.Id.ToString()
 			});
-            ViewBag.CategoryList = CategoryList;
-			return View();
+
+            EventVM eventVM = new()
+            {
+                CategoryList = CategoryList,
+                Event = new Event()
+            };
+			return View(eventVM);
         }
         [HttpPost]
-        public IActionResult Create(Event obj)
+        public IActionResult Create(EventVM eventVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Event.Add(obj);
+                _unitOfWork.Event.Add(eventVM.Event);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+				eventVM.CategoryList = _unitOfWork.Category.GetAll().ToList().Select(u => new SelectListItem
+				{
+					Text = u.Name,
+					Value = u.Id.ToString()
+				});
+                return View(eventVM);
+			}
         }
         public IActionResult Delete(int? id)
         {

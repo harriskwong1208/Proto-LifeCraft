@@ -1,4 +1,4 @@
-﻿@model Event
+﻿@model EventVM
 
 <h1>Create Event</h1>
 <hr />
@@ -11,24 +11,24 @@
 		*@
 		<div asp-validation-summary="All"></div>
 		<div>
-			<label asp-for="Name"></label>
-			<input asp-for="Name" placeholder="Enter Event Name" />
-			<span asp-validation-for="Name"></span>
+			<label asp-for="Event.Name"></label>
+			<input asp-for="Event.Name" placeholder="Enter Event Name" />
+			<span asp-validation-for="Event.Name"></span>
 		</div>
 		<div>
-			<label asp-for="Description"></label>
-			<textarea asp-for="Description" placeholder="Enter a description" ></textarea>
+			<label asp-for="Event.Description"></label>
+			<textarea asp-for="Event.Description" placeholder="Enter a description" ></textarea>
 		</div>
 		<div>
-			<label asp-for="Date"></label>
-			<input asp-for="Date" placeholder="Enter a date for this event" />
+			<label asp-for="Event.Date"></label>
+			<input asp-for="Event.Date" placeholder="Enter a date for this event" />
 		</div>
 		<div>
-			<select asp-for="CategoryId" asp-items="ViewBag.CategoryList" >
+			<select asp-for="Event.CategoryId" asp-items="@Model.CategoryList" >
 				<option disabled selected >--Select Category--</option>
 			</select>
-			<label asp-for="CategoryId"></label>
-			<span asp-validation-for="CategoryId" ></span>
+			<label asp-for="Event.CategoryId"></label>
+			<span asp-validation-for="Event.CategoryId" ></span>
 		</div>
 	</div>
 	<div class="buttons">
