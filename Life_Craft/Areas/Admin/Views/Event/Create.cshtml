@@ -30,6 +30,10 @@
 			<label asp-for="Event.CategoryId"></label>
 			<span asp-validation-for="Event.CategoryId" ></span>
 		</div>
+		<div>
+			<label asp-for="Event.ImageUrl"></label>
+			<input type="file"  />
+		</div>
 	</div>
 	<div class="buttons">
 		<button class="back-btn" asp-controller="Event" asp-action="Index">Back</button>

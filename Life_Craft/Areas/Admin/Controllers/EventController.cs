@@ -78,6 +78,7 @@ namespace Life_Craft.Areas.Admin.Controllers
             }
             else
             {
+                //This is to repopulate the drop down again, because the post method will not repopulate the drop down if faced with errors
 				eventVM.CategoryList = _unitOfWork.Category.GetAll().ToList().Select(u => new SelectListItem
 				{
 					Text = u.Name,
