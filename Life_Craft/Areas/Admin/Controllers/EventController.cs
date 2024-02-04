@@ -22,37 +22,10 @@ namespace Life_Craft.Areas.Admin.Controllers
 
             return View(events);
         }
-        public IActionResult Edit(int? id)
-        {
-            if (id == 0 || id == null)
-            {
-                return NotFound();
-            }
-            Event? obj = _unitOfWork.Event.Get(u => u.Id == id);
 
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            return View(obj);
-
-
-        }
-        [HttpPost]
-        public IActionResult Edit(Event obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Event.Update(obj);
-                _unitOfWork.Save();
-                TempData["Success"] = "Edited succesfully";
-                return RedirectToAction("Index");
-            }
-
-
-            return View();
-        }
-        public IActionResult Create()
+        //Method for update or insert(Create)
+        //If id is present, then update, otherwise, insert(Create)
+        public IActionResult Upsert(int? id)
         {
 			IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().ToList().Select(u => new SelectListItem
 			{
@@ -65,10 +38,20 @@ namespace Life_Craft.Areas.Admin.Controllers
                 CategoryList = CategoryList,
                 Event = new Event()
             };
-			return View(eventVM);
+            if (id == null || id == 0)
+            {
+                return View(eventVM);
+            }
+            else
+            {
+                //update
+                eventVM.Event = _unitOfWork.Event.Get(u=>u.Id == id);
+                return View(eventVM);
+            }
         }
+        //IFormFile? file is for the file upload in the create view when post method is called
         [HttpPost]
-        public IActionResult Create(EventVM eventVM)
+        public IActionResult Upsert(EventVM eventVM,IFormFile? file)
         {
             if (ModelState.IsValid)
             {

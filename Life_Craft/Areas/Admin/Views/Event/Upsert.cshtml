@@ -1,8 +1,10 @@
 ﻿@model EventVM
 
-<h1>Create Event</h1>
+<h1>@(Model.Event.Id != 0 ? "Update" : "Create") Event</h1>
 <hr />
-<form method="post">
+@* enctype="multipart/form-data"  is enable the form to submit with a file input *@
+<form method="post" enctype="multipart/form-data">
+	<input asp-for="Event.Id" hidden/>
 	<div class="inputs">
 		@* asp-validation-summary can have different values
 		1. ModelOnly= only allow validations from models (dataAnnotations)
@@ -37,8 +39,15 @@
 	</div>
 	<div class="buttons">
 		<button class="back-btn" asp-controller="Event" asp-action="Index">Back</button>
-		<button>Create</button>
-	</div>
+		@if (Model.Event.Id != 0)
+		{
+			<button type="submit">Update</button>
+		}
+		else
+		{
+			<button type="submit">Create</button>
+		}
+			</div>
 </form>
 
 @section Scripts {
