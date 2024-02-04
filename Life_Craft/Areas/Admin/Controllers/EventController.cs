@@ -11,9 +11,11 @@ namespace Life_Craft.Areas.Admin.Controllers
     public class EventController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public EventController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public EventController(IUnitOfWork unitOfWork,IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -55,6 +57,24 @@ namespace Life_Craft.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Find wwwRoot folder
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if(file != null)
+                {
+                    //Create a guid number as the name for the file to be stored in wwwRoot folder
+                    //Add the file extentsion at the end
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    //Save file to Event folder inside images folder 
+                    string eventPath = Path.Combine(wwwRootPath, @"images\Event");
+              
+                    using (var fileStream = new FileStream(Path.Combine(eventPath, filename), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    //Add image url to database
+                    eventVM.Event.ImageUrl = @"\images\Event\" + filename;
+                }
+
                 _unitOfWork.Event.Add(eventVM.Event);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
