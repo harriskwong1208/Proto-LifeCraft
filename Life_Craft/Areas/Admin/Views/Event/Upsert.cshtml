@@ -5,6 +5,9 @@
 @* enctype="multipart/form-data"  is enable the form to submit with a file input *@
 <form method="post" enctype="multipart/form-data">
 	<input asp-for="Event.Id" hidden/>
+
+
+
 	<div class="inputs">
 		@* asp-validation-summary can have different values
 		1. ModelOnly= only allow validations from models (dataAnnotations)
@@ -32,6 +35,7 @@
 			<label asp-for="Event.CategoryId"></label>
 			<span asp-validation-for="Event.CategoryId" ></span>
 		</div>
+		<img src="@Model.Event.ImageUrl" width="200px" style="border-radius:5px;border:1px solid #bbb9b9"/>
 		<div>
 			<label asp-for="Event.ImageUrl"></label>
 			<input type="file" name="file" />

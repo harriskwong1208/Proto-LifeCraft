@@ -67,6 +67,18 @@ namespace Life_Craft.Areas.Admin.Controllers
                     //Save file to Event folder inside images folder 
                     string eventPath = Path.Combine(wwwRootPath, @"images\Event");
               
+
+                    if(!string.IsNullOrEmpty(eventVM.Event.ImageUrl))
+                    {
+                        //delete old image 
+                        //Gets the path of the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, eventVM.Event.ImageUrl.TrimStart('\\'));
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     using (var fileStream = new FileStream(Path.Combine(eventPath, filename), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -74,8 +86,15 @@ namespace Life_Craft.Areas.Admin.Controllers
                     //Add image url to database
                     eventVM.Event.ImageUrl = @"\images\Event\" + filename;
                 }
-
-                _unitOfWork.Event.Add(eventVM.Event);
+                //If id ==0, its to create a new item, else it is updating
+                if (eventVM.Event.Id == 0)
+                {
+                    _unitOfWork.Event.Add(eventVM.Event);
+                }
+                else
+                {
+                    _unitOfWork.Event.Update(eventVM.Event);
+                }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
