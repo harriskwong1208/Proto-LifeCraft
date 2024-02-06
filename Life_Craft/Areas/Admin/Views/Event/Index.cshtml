@@ -8,41 +8,54 @@
 	</a>
 </div>
 
-<table class="table table-bordered table-striped">
+<table id="tblData" class="table table-bordered table-striped" width="100%">
 	<thead>
 		<tr>
-			<th>Event Name</th>
-			<th>Event Description</th>
+			<th>name</th>
+			<th>description</th>
+			<th>date</th>
+			<th>Category</th>
+
 			<th></th>
 		</tr>
 	</thead>
-	<tbody>
+		@{/* 
+		 * OLD CODE TO LIST ITEMS IN EVENT TABLE, REPLACED BY DATATABLE 
+		 * 
+		 * 
+		 *
+		<tbody>
 		@* Display events based on the lastest dates*@
-		@foreach (var obj in Model.OrderBy(u=> u.Date))
-		{
-			<tr>
-				<td>@obj.Name</td>
-				<td>@obj.Description</td>
-				@{
-					if (obj.Date != null)
-					{
-						<td>@obj.Date</td>
-					}else{
-						<td>Not data yet</td>
+			@foreach (var obj in Model.OrderBy(u=> u.Date))
+			{
+				<tr>
+					<td>@obj.Name</td>
+					<td>@obj.Description</td>
+					@{
+						if (obj.Date != null)
+						{
+							<td>@obj.Date</td>
+						}else{
+							<td>Not data yet</td>
+						}
 					}
-				}
-				<td>@obj.Category.Name</td>
-				<td>
-					<div class="w-75 btn-group" role="group">
-						<a asp-controller="Event" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="background-color:rgb(11,11,11)">
-							Edit
-						</a>
-						<a asp-controller="Event" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="background-color:red">
-							Delete
-						</a>
-					</div>
-				</td>
-			</tr>
+					<td>@obj.Category.Name</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-controller="Event" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="background-color:rgb(11,11,11)">
+								Edit
+							</a>
+							<a asp-controller="Event" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="background-color:red">
+								Delete
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+		*/
 		}
-	</tbody>
 </table> 
+@section Scripts{
+	<script src="~/js//Event.js"></script>
+}

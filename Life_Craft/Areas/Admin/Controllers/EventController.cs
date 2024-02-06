@@ -1,4 +1,5 @@
-﻿using LifeCraft.DataAccess.Repository.IRepository;
+﻿using LifeCraft.DataAccess.Repository;
+using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
 using LifeCraft.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -132,5 +133,14 @@ namespace Life_Craft.Areas.Admin.Controllers
 
 
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Event> events = _unitOfWork.Event.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data = events });
+        }
+        #endregion
     }
+
 }
