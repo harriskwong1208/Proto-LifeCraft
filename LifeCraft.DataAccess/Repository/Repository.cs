@@ -21,23 +21,41 @@ namespace LifeCraft.DataAccess.Repository
 
             // _db.categories == dbSet
             this.dbSet = _db.Set<T>();
+            _db.Events.Include(u => u.Category);
         }
         public void Add(T entity)
         {
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> expression)
+        public T Get(Expression<Func<T, bool>> expression, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(expression);
-            return query.FirstOrDefault();
+			if (!string.IsNullOrEmpty(includeProperties))
+			{
+				foreach (var includeProp in includeProperties.
+					Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					query = query.Include(includeProp);
+
+				}
+			}
+			return query.FirstOrDefault();
 
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.
+                    Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.ToList();
         }
 

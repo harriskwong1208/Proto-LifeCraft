@@ -20,7 +20,7 @@ namespace Life_Craft.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Event> events = _unitOfWork.Event.GetAll().ToList();
+            List<Event> events = _unitOfWork.Event.GetAll(includeProperties:"Category").ToList();
 
             return View(events);
         }

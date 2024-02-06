@@ -18,7 +18,21 @@ namespace LifeCraft.DataAccess.Repository
         }
         public void Update(Event obj)
         {
-            _db.Events.Update(obj);
+            var objFromDb = _db.Events.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFromDb != null)
+            {
+				objFromDb.Name = obj.Name;
+				objFromDb.Description = obj.Description;
+				objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.Date = obj.Date;
+				if (obj.ImageUrl != null)
+				{
+					objFromDb.ImageUrl = obj.ImageUrl;
+				}
+			}
+            {
+                
+            }
         }
     }
 }
