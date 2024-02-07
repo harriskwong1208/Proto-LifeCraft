@@ -133,7 +133,7 @@ namespace Life_Craft.Areas.Admin.Controllers
             List<Event> events = _unitOfWork.Event.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = events });
         }
-
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
 			var eventToBeDeleted = _unitOfWork.Event.Get(u => u.Id == id);
