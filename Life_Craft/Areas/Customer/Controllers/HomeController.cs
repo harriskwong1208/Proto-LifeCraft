@@ -1,3 +1,4 @@
+using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,15 +9,19 @@ namespace Life_Craft.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Event> eventList = _unitOfWork.Event.GetAll(includeProperties: "Category");
+
+            return View(eventList);
         }
 
         public IActionResult Privacy()
