@@ -136,22 +136,30 @@ namespace Life_Craft.Areas.Admin.Controllers
 
         public IActionResult Delete(int? id)
         {
-            var eventToBeDeleted = _unitOfWork.Event.Get(u => u.Id == id);
-            if(eventToBeDeleted == null)
-            {
-               return Json(new {success = false , message = "Error while deleting"});
-			}
-            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, eventToBeDeleted.ImageUrl.TrimStart('\\'));
-			if (System.IO.File.Exists(oldImagePath))
+			var eventToBeDeleted = _unitOfWork.Event.Get(u => u.Id == id);
+			if (eventToBeDeleted == null)
 			{
-				System.IO.File.Delete(oldImagePath);
+				return Json(new { success = false, message = "Error while deleting" });
 			}
 
-            _unitOfWork.Event.Remove(eventToBeDeleted);
-            _unitOfWork.Save();
-            return Json(new { success = true, message = "Delete successful." });
+            if (eventToBeDeleted.ImageUrl != null)
+            {
+                var oldImagePath =
+                               Path.Combine(_webHostEnvironment.WebRootPath,
+                               eventToBeDeleted.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+			_unitOfWork.Event.Remove(eventToBeDeleted);
+			_unitOfWork.Save();
+
+			return Json(new { success = true, message = "Delete Successful" });
 		}
+	}
         #endregion
     }
 
-}
+
