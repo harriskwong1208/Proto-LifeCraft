@@ -5,6 +5,7 @@ using LifeCraft.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace Life_Craft.Areas.Admin.Controllers
 {
@@ -110,15 +111,7 @@ namespace Life_Craft.Areas.Admin.Controllers
                 return View(eventVM);
 			}
         }
-        public IActionResult Delete(int? id)
-        {
-            if (id == 0 || id == null)
-            {
-                return NotFound();
-            }
-            Event? obj = _unitOfWork.Event.Get(u => u.Id == id);
-            return View(obj);
-        }
+
         [HttpPost, ActionName("delete")]
         public IActionResult DeletePost(int? id)
         {
@@ -140,6 +133,24 @@ namespace Life_Craft.Areas.Admin.Controllers
             List<Event> events = _unitOfWork.Event.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = events });
         }
+
+        public IActionResult Delete(int? id)
+        {
+            var eventToBeDeleted = _unitOfWork.Event.Get(u => u.Id == id);
+            if(eventToBeDeleted == null)
+            {
+               return Json(new {success = false , message = "Error while deleting"});
+			}
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, eventToBeDeleted.ImageUrl.TrimStart('\\'));
+			if (System.IO.File.Exists(oldImagePath))
+			{
+				System.IO.File.Delete(oldImagePath);
+			}
+
+            _unitOfWork.Event.Remove(eventToBeDeleted);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Delete successful." });
+		}
         #endregion
     }
 
