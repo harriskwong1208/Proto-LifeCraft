@@ -11,7 +11,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+//This service was added when the identity scafollded item was added
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Added, so when we want the implementation in the category controller class, it will know that it will have the immplementation of CategoryRepository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -30,7 +31,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+//Added this middleware for authentication, must be added before authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
