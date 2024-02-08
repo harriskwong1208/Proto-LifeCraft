@@ -23,6 +23,12 @@ namespace Life_Craft.Areas.Customer.Controllers
 
             return View(eventList);
         }
+        public IActionResult Details(int? id)
+        {
+            Event _event = _unitOfWork.Event.Get(u => u.Id==id,includeProperties: "Category");
+
+            return View(_event);
+        }
 
         public IActionResult Privacy()
         {
