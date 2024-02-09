@@ -3,6 +3,8 @@ using LifeCraft.DataAccess.Repository;
 using LifeCraft.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using LifeCraft.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Added because identity uses razor pages instead mvc 
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
