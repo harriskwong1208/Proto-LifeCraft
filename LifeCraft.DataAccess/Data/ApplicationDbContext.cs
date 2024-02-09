@@ -6,15 +6,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LifeCraft.DataAccess.Data
 {
-    public class ApplicationDbContext: IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
-
+        public DbSet<ApplicationUser> ApplicationUsers {get;set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
