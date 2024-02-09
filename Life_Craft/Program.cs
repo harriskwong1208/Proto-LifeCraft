@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>
 //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();   // OLD CODE
 
 //Service for adding users and assigning roles
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 //Added, so when we want the implementation in the category controller class, it will know that it will have the immplementation of CategoryRepository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
