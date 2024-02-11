@@ -2,6 +2,8 @@
 using LifeCraft.DataAccess.Repository.IRepository;
 using LifeCraft.Models;
 using LifeCraft.Models.ViewModels;
+using LifeCraft.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,6 +12,8 @@ using Microsoft.Extensions.Logging;
 namespace Life_Craft.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class EventController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

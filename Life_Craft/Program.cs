@@ -13,11 +13,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+
 //This service was added when the identity scafollded item was added
 //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();   // OLD CODE
 
 //Service for adding users and assigning roles
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+//Added to redirect errors to identity views instead of default route.
+//HAS TO BE ADDED AFTER IDENTITY SERVICE
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+});
 
 //Added, so when we want the implementation in the category controller class, it will know that it will have the immplementation of CategoryRepository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
